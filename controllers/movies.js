@@ -52,9 +52,9 @@ module.exports.addMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  const { movieId } = req.params.id;
+  const { id } = req.params;
 
-  Movies.findById(movieId)
+  Movies.findById(id)
     .then((movie) => {
       if (!movie) {
         next(new NotFoundErr('Фильм с указанным id не найден'));
@@ -62,7 +62,7 @@ module.exports.deleteMovie = (req, res, next) => {
         next(new ForbiddenErr('Вы не можете удалять фильмы других пользователей'));
       }
 
-      Movies.findByIdAndRemove(movieId)
+      Movies.findByIdAndRemove(id)
         .then((item) => res.send(item))
         .catch(next);
     })
