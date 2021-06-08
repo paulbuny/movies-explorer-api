@@ -36,8 +36,8 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator(image) {
-        return validator.isURL(image);
+      validator(trailer) {
+        return validator.isURL(trailer);
       },
       message: 'Неверно указана ссылка',
     },
